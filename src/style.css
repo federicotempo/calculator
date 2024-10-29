@@ -34,8 +34,7 @@ button {
     font-size: 2em;
     cursor: pointer;
     transition: background-color 0.3s;
-    appearance: none;
-    
+    appearance: none;   
 }
 
 button:hover {
@@ -44,6 +43,10 @@ button:hover {
 
 #zero-button {
     flex: 2.45
+}
+
+#equal-button:hover {
+    background-color: buttonface;
 }
 
 #equal-button {
