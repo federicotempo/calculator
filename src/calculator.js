@@ -39,8 +39,32 @@ function operate(firstNumber, secondNumber, operator) {
     return result;
 }
 
+function displayValue(value) {
+
+    if (displayedValue.innerText === "0" && value === ".") {
+        displayedValue.innerText = "0" + value;
+    } else if (displayedValue.innerText === "0") {
+        displayedValue.innerText = value;
+    } else {
+        displayedValue.innerText += value;
+    }
+
+}
+
+function selectNumericButtons() {
+    let selection = this.innerText;
+    displayValue(selection);
+}
+
+const displayedValue = document.querySelector("#value");
+
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "+";
 
+let numericButtons = document.querySelectorAll(".numeric-button");
+
+numericButtons.forEach(button => {
+    button.addEventListener("click", selectNumericButtons);
+})
 
