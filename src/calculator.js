@@ -41,13 +41,19 @@ function operate(firstNumber, secondNumber, operator) {
 
 function displayValue(value) {
 
-    if (displayedValue.innerText === "0" && value === ".") {
-        displayedValue.innerText = "0" + value;
-    } else if (displayedValue.innerText === "0") {
-        displayedValue.innerText = value;
-    } else {
-        displayedValue.innerText += value;
+    if (displayedValue.innerText.length < 10) {
+        if (displayedValue.innerText === "0" && value === ".") {
+            displayedValue.innerText += value;
+        } else if (displayedValue.innerText.includes(".") && value === ".") {
+            return
+        } else if (displayedValue.innerText === "0") {
+            displayedValue.innerText = value;
+        } else {
+            displayedValue.innerText += value;
+        }
     }
+
+
 
 }
 
