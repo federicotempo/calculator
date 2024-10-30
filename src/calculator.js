@@ -42,7 +42,11 @@ function operate(firstNumber, secondNumber, operator) {
 function displayValue(value) {
 
     if (operator !== "") {
-        displayedValue.innerText = "0";
+        
+        if (displayedValue.innerText === firstNumber.toString()) {
+            displayedValue.innerText = "0";
+        }
+
         if (displayedValue.innerText.length < 10) {
             if (displayedValue.innerText === "0" && value === ".") {
                 displayedValue.innerText += value;
@@ -58,6 +62,7 @@ function displayValue(value) {
             }
         }
     } else {
+
         if (displayedValue.innerText.length < 10) {
             if (displayedValue.innerText === "0" && value === ".") {
                 displayedValue.innerText += value;
@@ -73,7 +78,6 @@ function displayValue(value) {
             }
         }
     }
-
 }
 
 function cleanValues(result) {
@@ -92,6 +96,7 @@ function selectNumericButtons() {
 }
 
 function selectOperator() {
+    displayedValue.innerText = firstNumber.toString();
     let selectedOperator = this.innerText;
     operator = selectedOperator;
 }
@@ -109,7 +114,7 @@ let equalButton = document.querySelector("#equal-button");
 equalButton.addEventListener("click", () => {
     let result = 0;
     if (operator !== "") {
-        result = operate(firstNumber, secondNumber, operator);
+        result = parseFloat(Number(operate(firstNumber, secondNumber, operator)).toPrecision(9));
         showResult(result)
         cleanValues(result);
     }
