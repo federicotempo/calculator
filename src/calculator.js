@@ -76,6 +76,16 @@ function displayValue(value) {
 
 }
 
+function cleanValues(result) {
+    firstNumber = result;
+    secondNumber = 0;
+    operator = "";
+}
+
+function showResult(result) {
+    displayedValue.innerText = result;
+}
+
 function selectNumericButtons() {
     let selectedNumber = this.innerText;
     displayValue(selectedNumber);
@@ -97,8 +107,11 @@ let numericButtons = document.querySelectorAll(".numeric-button");
 let equalButton = document.querySelector("#equal-button");
 
 equalButton.addEventListener("click", () => {
+    let result = 0;
     if (operator !== "") {
-        operate(firstNumber, secondNumber, operator);
+        result = operate(firstNumber, secondNumber, operator);
+        showResult(result)
+        cleanValues(result);
     }
 })
 
