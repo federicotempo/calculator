@@ -15,6 +15,16 @@ function divide(a, b) {
     return a / b;
 }
 
+function toPercentage() {
+    if (operator !== "") {
+        displayedValue.innerText = parseFloat(Number(secondNumber / 100).toPrecision(8));
+        secondNumber = secondNumber / 100;
+    } else {
+        displayedValue.innerText = parseFloat(Number(firstNumber / 100).toPrecision(8));
+        firstNumber = firstNumber / 100;
+    }
+}
+
 function operate(firstNumber, secondNumber, operator) {
     let result = 0;
 
@@ -42,7 +52,7 @@ function operate(firstNumber, secondNumber, operator) {
 function displayValue(value) {
 
     if (operator !== "") {
-        
+
         if (displayedValue.innerText === firstNumber.toString()) {
             displayedValue.innerText = "0";
         }
@@ -61,7 +71,13 @@ function displayValue(value) {
                 secondNumber = Number(displayedValue.innerText);
             }
         }
+
     } else {
+        
+        if (result !== 0) {
+            displayedValue.innerText = "0"
+            result = 0;
+        }
 
         if (displayedValue.innerText.length < 9) {
             if (displayedValue.innerText === "0" && value === ".") {
@@ -106,17 +122,19 @@ const displayedValue = document.querySelector("#value");
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
+let result = 0;
 
 let operatorButtons = document.querySelectorAll(".operator-button")
 let numericButtons = document.querySelectorAll(".numeric-button");
 let equalButton = document.querySelector("#equal-button");
 let clearButton = document.querySelector("#clear-button")
+let percentageButton = document.querySelector(".percentage-button")
 
 equalButton.addEventListener("click", () => {
-    let result = 0;
+    
     if (operator !== "") {
         result = parseFloat(Number(operate(firstNumber, secondNumber, operator)).toPrecision(8));
-        showResult(result)
+        showResult(result);
         cleanValues(result);
     }
 })
@@ -134,4 +152,5 @@ clearButton.addEventListener("click", () => {
     displayedValue.innerText = "0";
 })
 
+percentageButton.addEventListener("click", toPercentage);
 
