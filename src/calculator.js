@@ -193,21 +193,31 @@ negativeButton.addEventListener("click", toNegative);
 
 document.addEventListener("keydown", function (event) {
     const key = event.key;
+    const button = document.querySelector(`button[data-key="${key}"]`)
 
-    if (!isNaN(key)) {
-        handleNumberKey(key);
-    } else if (key === "+") {
-        handleOperatorKey(key);
-    } else if (key === "-") {
-        handleOperatorKey(key);
-    } else if (key === "*") {
-        handleOperatorKey(key);
-    } else if (key === "/") {
-        handleOperatorKey(key);
-    } else if (key === "Enter") {
-        handleEqualButton()
-    } else if (key === "Backspace" || key === "Delete") {
-        cleanValues(0);
-        displayedValue.innerText = "0";
+    if (button) {
+        button.classList.add("active");
+
+        if (!isNaN(key) || key === ".") {
+            handleNumberKey(key);
+        } else if (key === "+") {
+            handleOperatorKey(key);
+        } else if (key === "-") {
+            handleOperatorKey(key);
+        } else if (key === "*") {
+            handleOperatorKey(key);
+        } else if (key === "/") {
+            handleOperatorKey(key);
+        } else if (key === "Enter") {
+            handleEqualButton()
+        } else if (key === "Backspace" || key === "Delete") {
+            cleanValues(0);
+            displayedValue.innerText = "0";
+        }
+
+        setTimeout(() => {
+            button.classList.remove('active');
+        }, 150);
     }
+
 })
