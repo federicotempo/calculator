@@ -16,12 +16,26 @@ function divide(a, b) {
 }
 
 function toPercentage() {
+    let percentage = 0;
+
     if (operator !== "") {
-        displayedValue.innerText = parseFloat(Number(secondNumber / 100).toPrecision(8));
-        secondNumber = secondNumber / 100;
+        percentage = (secondNumber / 100);
+        let percentageString = percentage.toString();
+        if (percentageString.length <= 9) {
+            displayedValue.innerText = percentageString;
+        } else {
+            displayedValue.innerText = percentage.toFixed(8).slice(0, 9);
+        }
+        secondNumber = percentage;
     } else {
-        displayedValue.innerText = parseFloat(Number(firstNumber / 100).toPrecision(8));
-        firstNumber = firstNumber / 100;
+        percentage = (firstNumber / 100);
+        let percentageString = percentage.toString();
+        if (percentageString.length <= 9) {
+            displayedValue.innerText = percentageString;
+        } else {
+            displayedValue.innerText = percentage.toFixed(8).slice(0, 9);
+        }
+        firstNumber = percentage;
     }
 }
 
@@ -73,7 +87,7 @@ function displayValue(value) {
         }
 
     } else {
-        
+
         if (result !== 0) {
             displayedValue.innerText = "0"
             result = 0;
@@ -131,7 +145,7 @@ let clearButton = document.querySelector("#clear-button")
 let percentageButton = document.querySelector(".percentage-button")
 
 equalButton.addEventListener("click", () => {
-    
+
     if (operator !== "") {
         result = parseFloat(Number(operate(firstNumber, secondNumber, operator)).toPrecision(8));
         showResult(result);
