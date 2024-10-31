@@ -125,10 +125,27 @@ function selectNumericButtons() {
     displayValue(selectedNumber);
 }
 
+function handleNumberKey(key) {
+    displayValue(key);
+}
+
 function selectOperator() {
     displayedValue.innerText = firstNumber.toString();
     let selectedOperator = this.innerText;
     operator = selectedOperator;
+}
+
+function handleOperatorKey(key) {
+    displayedValue.innerText = firstNumber.toString();
+    operator = key;
+}
+
+function handleEqualButton() {
+    if (operator !== "") {
+        result = parseFloat(Number(operate(firstNumber, secondNumber, operator)).toPrecision(8));
+        showResult(result);
+        cleanValues(result);
+    }
 }
 
 function toNegative() {
@@ -155,13 +172,7 @@ let clearButton = document.querySelector("#clear-button");
 let percentageButton = document.querySelector(".percentage-button");
 let negativeButton = document.querySelector("#negative-button");
 
-equalButton.addEventListener("click", () => {
-    if (operator !== "") {
-        result = parseFloat(Number(operate(firstNumber, secondNumber, operator)).toPrecision(8));
-        showResult(result);
-        cleanValues(result);
-    }
-})
+equalButton.addEventListener("click", handleEqualButton)
 
 numericButtons.forEach(button => {
     button.addEventListener("click", selectNumericButtons);
@@ -179,3 +190,24 @@ clearButton.addEventListener("click", () => {
 percentageButton.addEventListener("click", toPercentage);
 
 negativeButton.addEventListener("click", toNegative);
+
+document.addEventListener("keydown", function (event) {
+    const key = event.key;
+
+    if (!isNaN(key)) {
+        handleNumberKey(key);
+    } else if (key === "+") {
+        handleOperatorKey(key);
+    } else if (key === "-") {
+        handleOperatorKey(key);
+    } else if (key === "*") {
+        handleOperatorKey(key);
+    } else if (key === "/") {
+        handleOperatorKey(key);
+    } else if (key === "Enter") {
+        handleEqualButton()
+    } else if (key === "Backspace" || key === "Delete") {
+        cleanValues(0);
+        displayedValue.innerText = "0";
+    }
+})
