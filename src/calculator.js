@@ -89,7 +89,7 @@ function displayValue(value) {
     } else {
 
         if (result !== 0) {
-            displayedValue.innerText = "0"
+            displayedValue.innerText = "0";
             result = 0;
         }
 
@@ -131,6 +131,16 @@ function selectOperator() {
     operator = selectedOperator;
 }
 
+function toNegative() {
+    if (operator !== "") {
+        secondNumber *= (-1);
+        displayedValue.innerText = secondNumber;
+    } else {
+        firstNumber *= (-1);
+        displayedValue.innerText = firstNumber;
+    }
+}
+
 const displayedValue = document.querySelector("#value");
 
 let firstNumber = 0;
@@ -138,14 +148,14 @@ let secondNumber = 0;
 let operator = "";
 let result = 0;
 
-let operatorButtons = document.querySelectorAll(".operator-button")
+let operatorButtons = document.querySelectorAll(".operator-button");
 let numericButtons = document.querySelectorAll(".numeric-button");
 let equalButton = document.querySelector("#equal-button");
-let clearButton = document.querySelector("#clear-button")
-let percentageButton = document.querySelector(".percentage-button")
+let clearButton = document.querySelector("#clear-button");
+let percentageButton = document.querySelector(".percentage-button");
+let negativeButton = document.querySelector("#negative-button");
 
 equalButton.addEventListener("click", () => {
-
     if (operator !== "") {
         result = parseFloat(Number(operate(firstNumber, secondNumber, operator)).toPrecision(8));
         showResult(result);
@@ -168,3 +178,4 @@ clearButton.addEventListener("click", () => {
 
 percentageButton.addEventListener("click", toPercentage);
 
+negativeButton.addEventListener("click", toNegative);
